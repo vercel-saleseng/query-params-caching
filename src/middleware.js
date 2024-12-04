@@ -25,6 +25,6 @@ export function middleware(request) {
     }
 }
 
-// export const config = {
-//     matcher: '/pokemon/:path*',
-// }
+export const config = {
+    matcher: '/pokemon/:path*',
+}
