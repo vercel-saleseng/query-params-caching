@@ -7,7 +7,7 @@ import Link from 'next/link';
 export const getServerSideProps = (async (context) => {
     // console.log(context)
     // Check the x-vercel-cache header
-    const cacheStatus = context.req.headers['x-vercel-cache'] || 'MISS'
+    const cacheStatus = context.req.headers['X-Vercel-Cache'] || 'MISS'
 
     let statusMessage;
 
