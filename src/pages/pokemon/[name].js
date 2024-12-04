@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link';
 
 export const getServerSideProps = (async (context) => {
-    console.log(context)
+    // console.log(context)
     // Check the x-vercel-cache header
     const cacheStatus = context.req.headers['x-vercel-cache'] || 'MISS'
 
