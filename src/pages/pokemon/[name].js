@@ -3,9 +3,10 @@ import { fetchPokemonDetails } from '@/utils/pokemon';
 import { PokemonDetail } from '@/components/pokemon-detail';
 import { useRouter } from 'next/router'
 import Link from 'next/link';
+import { useState, useEffect } from "react";
 
 export const getServerSideProps = (async (context) => {
-    console.log(context.req.headers)
+    const headers = console.log(context.req.headers)
     // Check the x-vercel-cache header
     const cacheStatus = context.req.headers['X-Vercel-Cache'] || 'MISS'
 
@@ -31,7 +32,29 @@ export const getServerSideProps = (async (context) => {
     return { props: { pokemon, statusMessage } }
 })
 
-export default function PokemonPage({ pokemon, statusMessage }) {
+export default function PokemonPage({ pokemon, statusMessage, headers }) {
+    const [cacheStatus, setCacheStatus] = useState(null)
+
+    useEffect(() => {
+        async function checkCacheStatus() {
+            try {
+                const response = await fetch(window.location.href, {
+                    method: 'HEAD',
+                })
+                console.log('respolnse', response)
+                const cacheHeader = response.headers.get('x-vercel-cache')
+                setCacheStatus(cacheHeader)
+            } catch (error) {
+                console.error('Error checking cache status:', error)
+                setCacheStatus('Error')
+            }
+        }
+
+        console.log('adadsfas', cacheStatus)
+        checkCacheStatus()
+    }, [])
+
+    console.log(headers)
 
     return (
         (<main className="container mx-auto p-4">
