@@ -11,19 +11,13 @@ export const getServerSideProps = (async (context) => {
   const data = await fetchPokemon(offset, limit);
   const totalPages = Math.ceil(data.count / limit);
 
-  return { props: { data, page, totalPages, statusMessage } }
+  return { props: { data, page, totalPages } }
 })
 
-export default function Index({ data, page, totalPages, statusMessage }) {
+export default function Index({ data, page, totalPages }) {
 
   return (
     (<main className="container mx-auto p-4">
-      <Alert>
-        <AlertTitle className="font-bold">Cache Status</AlertTitle>
-        <AlertDescription>
-          {statusMessage}
-        </AlertDescription>
-      </Alert>
       <h1 className="text-3xl font-bold my-4">Pokémon List</h1>
       <PokemonList pokemon={data.results} currentPage={page} totalPages={totalPages} />
     </main>)

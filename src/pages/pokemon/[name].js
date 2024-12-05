@@ -6,10 +6,10 @@ import Link from 'next/link';
 export const getServerSideProps = (async (context) => {
     const pokemon = await fetchPokemonDetails(context.query.name);
 
-    return { props: { pokemon, statusMessage } }
+    return { props: { pokemon } }
 })
 
-export default function PokemonPage({ pokemon, statusMessage, headers }) {
+export default function PokemonPage({ pokemon }) {
 
     return (
         (<main className="container mx-auto p-4">
